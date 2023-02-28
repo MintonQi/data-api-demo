@@ -1,6 +1,5 @@
 package com.minton.dataapi.vo;
 
-
 import java.util.HashMap;
 
 public class ResultInfo extends HashMap<String, Object> {

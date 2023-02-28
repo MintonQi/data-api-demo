@@ -2,24 +2,24 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.minton.dataapi.dao.TAMapper">
+<mapper namespace="com.minton.dataapi.dao.TaMapper">
 
-    <sql id="TAfields">
-        A,B,C,D,E,F,aa,bb,cc,dd,ee
+    <sql id="Tafields">
+        a,b,c,d,e,f,aa,bb,cc,dd,ee
     </sql>
-    <sql id="TBfields">
+    <sql id="Tbfields">
         A,B,C,D,E,F,aa,c_aa,bb,c_bb,cc,c_cc,dd,c_dd,ee,c_ee
     </sql>
 
-    <select id="selectTAByA" resultType="TA">
-        select <include refid="TAfields"></include>
-        from TA
-        where A = #{A};
+    <select id="selectTaByA" resultType="Ta">
+        select <include refid="Tafields"></include>
+        from ta
+        where a = #{a};
     </select>
 
-    <insert id="insertTA" parameterType="TA">
-        INSERT INTO TA (<include refid="TAfields"></include>)
-        VALUES(#{A},#{B},#{C},#{D},#{E},#{F},#{aa},#{bb},#{cc},#{dd},#{ee})
+    <insert id="insertTa" parameterType="Ta">
+        INSERT INTO TA (<include refid="Tafields"></include>)
+        VALUES(#{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee})
     </insert>
 
 

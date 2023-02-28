@@ -1,12 +1,12 @@
 package com.minton.dataapi.entity;
 
-public class TB {
-    private String A;
-    private String B;
-    private String C;
-    private String D;
-    private String E;
-    private String F;
+public class Tb {
+    private String a;
+    private String b;
+    private String c;
+    private String d;
+    private String e;
+    private String f;
     private int aa;
     private int c_aa;
     private int bb;
@@ -18,52 +18,54 @@ public class TB {
     private int ee;
     private int c_ee;
 
+    public Tb(){}
+
     public String getA() {
-        return A;
+        return a;
     }
 
     public void setA(String a) {
-        A = a;
+        this.a = a;
     }
 
     public String getB() {
-        return B;
+        return b;
     }
 
     public void setB(String b) {
-        B = b;
+        this.b = b;
     }
 
     public String getC() {
-        return C;
+        return c;
     }
 
     public void setC(String c) {
-        C = c;
+        this.c = c;
     }
 
     public String getD() {
-        return D;
+        return d;
     }
 
     public void setD(String d) {
-        D = d;
+        this.d = d;
     }
 
     public String getE() {
-        return E;
+        return e;
     }
 
     public void setE(String e) {
-        E = e;
+        this.e = e;
     }
 
     public String getF() {
-        return F;
+        return f;
     }
 
     public void setF(String f) {
-        F = f;
+        this.f = f;
     }
 
     public int getAa() {
