@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minton.dataapi.dao.TAMapper">
+
+    <sql id="TAfields">
+        A,B,C,D,E,F,aa,bb,cc,dd,ee
+    </sql>
+    <sql id="TBfields">
+        A,B,C,D,E,F,aa,c_aa,bb,c_bb,cc,c_cc,dd,c_dd,ee,c_ee
+    </sql>
+
+    <select id="selectTAByA" resultType="TA">
+        select <include refid="TAfields"></include>
+        from TA
+        where A = #{A};
+    </select>
+
+    <insert id="insertTA" parameterType="TA">
+        INSERT INTO TA (<include refid="TAfields"></include>)
+        VALUES(#{A},#{B},#{C},#{D},#{E},#{F},#{aa},#{bb},#{cc},#{dd},#{ee})
+    </insert>
+
+
+
+
+
+</mapper>
