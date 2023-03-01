@@ -26,6 +26,17 @@
         DELETE FROM TA WHERE a = #{a};
     </delete>
 
+    <update id="updateTa" >
+        UPDATE TA
+        SET b = #{ta.b}, c = #{ta.c}, d = #{ta.d}, e = #{ta.e}, f = #{ta.f}, aa = #{ta.aa}, bb = #{ta.bb}, cc = #{ta.cc}, dd = #{ta.dd}, ee = #{ta.ee}
+        WHERE a = #{a}
+    </update>
+
+    <select id="fuzzySearchByA" resultType="Ta">
+        SELECT <include refid="Tafields"></include>
+        FROM TA
+        WHERE A LIKE concat('%',#{a},'%')
+    </select>
 
 
 

@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ta")
 public class TaController {
@@ -27,7 +29,7 @@ public class TaController {
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
             return ResultInfo.error(4001,"此A字段的值已存在！");
-        } catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e){ // 处理得，，，可能不是很对。。。
             e.printStackTrace();
             return ResultInfo.error(4002, "A字段不能为空！");
         } catch (Exception e){
@@ -38,18 +40,38 @@ public class TaController {
 
     @DeleteMapping("/{a}")
     public ResultInfo deleteTaByA(@PathVariable("a") String a){
-        try{
-            System.out.println(a);
-            taService.deleteTaByA(a);
-            return ResultInfo.success();
-        } catch (Exception e){
-            System.out.println(a);
-            e.printStackTrace();
+        if(taService.getTaByA(a) != null){
+            try{
+                taService.deleteTaByA(a);
+                return ResultInfo.success();
+            } catch(Exception e){
+                e.printStackTrace();
+                return ResultInfo.error(5000,"未知错误");
+            }
+        } else {
             return ResultInfo.error(4003, "此A字段值的记录不存在！");
         }
-
-
-
     }
 
+    @PutMapping("/{a}")
+    public ResultInfo updateTa(@PathVariable("a") String a, @RequestBody Ta ta){
+        try{
+            taService.updateTa(a, ta);
+            return ResultInfo.success();
+        } catch(Exception e){
+            e.printStackTrace();
+            return ResultInfo.error(5000,"未知错误");
+        }
+    }
+
+    @GetMapping("/{a}")
+    public ResultInfo query(@PathVariable("a") String a){
+        try {
+            List<Ta> list_ta = taService.fuzzySearchByA(a);
+            return ResultInfo.success(list_ta);
+        } catch(Exception e){
+            e.printStackTrace();
+            return ResultInfo.error(5000, "未知错误");
+        }
+    }
 }
