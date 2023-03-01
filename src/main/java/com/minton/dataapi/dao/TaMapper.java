@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TaMapper {
 
-    Ta selectTaByA(String A);
+    Ta selectTaByA(String a);
     void insertTa(Ta ta);
-
-
+    void deleteTaByA(String a);
 }

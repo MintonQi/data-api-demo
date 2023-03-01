@@ -14,10 +14,11 @@ public class TaService {
     }
 
 
-
-    public void addTable(Ta ta){
+    public void addTa(Ta ta){
         taMapper.insertTa(ta);
     }
 
-
+    public void deleteTaByA(String a) {
+        taMapper.deleteTaByA(a);
+    }
 }

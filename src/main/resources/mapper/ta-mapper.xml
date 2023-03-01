@@ -22,6 +22,10 @@
         VALUES(#{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee})
     </insert>
 
+    <delete id="deleteTaByA">
+        DELETE FROM TA WHERE a = #{a};
+    </delete>
+
 
 
 

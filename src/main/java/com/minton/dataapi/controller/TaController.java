@@ -21,23 +21,35 @@ public class TaController {
 
     @PostMapping
     public ResultInfo addTa(@RequestBody Ta ta){
-        System.out.println(ta.getA());
-        System.out.println(ta.getB());
-        System.out.println(ta.getAa());
-        System.out.println(ResultInfo.success(ta));
         try{
-            taService.addTable(ta);
+            taService.addTa(ta);
             return ResultInfo.success(ta);
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
-            return ResultInfo.error(400,"此A字段的值已存在！");
+            return ResultInfo.error(4001,"此A字段的值已存在！");
         } catch (DataIntegrityViolationException e){
             e.printStackTrace();
-            return ResultInfo.error(400, "A字段不能为空！");
+            return ResultInfo.error(4002, "A字段不能为空！");
         } catch (Exception e){
             e.printStackTrace();
-            return ResultInfo.error(500, "未知服务器错误");
+            return ResultInfo.error(500, "未知错误");
         }
+    }
+
+    @DeleteMapping("/{a}")
+    public ResultInfo deleteTaByA(@PathVariable("a") String a){
+        try{
+            System.out.println(a);
+            taService.deleteTaByA(a);
+            return ResultInfo.success();
+        } catch (Exception e){
+            System.out.println(a);
+            e.printStackTrace();
+            return ResultInfo.error(4003, "此A字段值的记录不存在！");
+        }
+
+
+
     }
 
 }
