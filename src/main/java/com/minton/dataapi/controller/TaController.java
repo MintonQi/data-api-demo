@@ -1,5 +1,6 @@
 package com.minton.dataapi.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
 import com.minton.dataapi.service.TaService;
 import com.minton.dataapi.vo.ResultInfo;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -74,4 +77,12 @@ public class TaController {
             return ResultInfo.error(5000, "未知错误");
         }
     }
+
+    @PostMapping("/import")
+    public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
+        taService.importTaExcel(ta_excel);
+        return ResultInfo.success();
+    }
+
+
 }

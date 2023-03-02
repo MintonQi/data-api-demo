@@ -1,107 +1,35 @@
 package com.minton.dataapi.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Ta {
+    @ExcelProperty(index = 0)
     private String a;
+    @ExcelProperty(index = 1)
     private String b;
+    @ExcelProperty(index = 2)
     private String c;
+    @ExcelProperty(index = 3)
     private String d;
+    @ExcelProperty(index = 4)
     private String e;
+    @ExcelProperty(index = 5)
     private String f;
+    @ExcelProperty(index = 6)
     private Integer aa;
+    @ExcelProperty(index = 7)
     private Integer bb;
+    @ExcelProperty(index = 8)
     private Integer cc;
+    @ExcelProperty(index = 9)
     private Integer dd;
+    @ExcelProperty(index = 10)
     private Integer ee;
-
-    public Ta(){}
-
-    public String getA() {
-        return a;
-    }
-
-    public void setA(String a) {
-        this.a = a;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public void setB(String b) {
-        this.b = b;
-    }
-
-    public String getC() {
-        return c;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public void setD(String d) {
-        this.d = d;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public void setE(String e) {
-        this.e = e;
-    }
-
-    public String getF() {
-        return f;
-    }
-
-    public void setF(String f) {
-        this.f = f;
-    }
-
-    public Integer getAa() {
-        return aa;
-    }
-
-    public void setAa(Integer aa) {
-        this.aa = aa;
-    }
-
-    public Integer getBb() {
-        return bb;
-    }
-
-    public void setBb(Integer bb) {
-        this.bb = bb;
-    }
-
-    public Integer getCc() {
-        return cc;
-    }
-
-    public void setCc(Integer cc) {
-        this.cc = cc;
-    }
-
-    public Integer getDd() {
-        return dd;
-    }
-
-    public void setDd(Integer dd) {
-        this.dd = dd;
-    }
-
-    public Integer getEe() {
-        return ee;
-    }
-
-    public void setEe(Integer ee) {
-        this.ee = ee;
-    }
 }
 

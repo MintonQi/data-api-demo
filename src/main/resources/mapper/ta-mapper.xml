@@ -7,9 +7,7 @@
     <sql id="Tafields">
         a,b,c,d,e,f,aa,bb,cc,dd,ee
     </sql>
-    <sql id="Tbfields">
-        A,B,C,D,E,F,aa,c_aa,bb,c_bb,cc,c_cc,dd,c_dd,ee,c_ee
-    </sql>
+
 
     <select id="selectTaByA" resultType="Ta">
         select <include refid="Tafields"></include>

@@ -7,12 +7,15 @@ import java.util.List;
 
 @Mapper
 public interface TaMapper {
-
     Ta selectTaByA(String a);
+
     void insertTa(Ta ta);
+
     void deleteTaByA(String a);
 
     void updateTa(String a, Ta ta);
 
     List<Ta> fuzzySearchByA(String a);
+
+    void save(List<Ta> cachedDataList);
 }
