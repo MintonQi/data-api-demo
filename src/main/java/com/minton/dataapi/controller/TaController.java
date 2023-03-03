@@ -2,6 +2,7 @@ package com.minton.dataapi.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
+import com.minton.dataapi.listener.TaReadListener;
 import com.minton.dataapi.service.TaService;
 import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ public class TaController {
     @PutMapping("/{a}")
     public ResultInfo updateTa(@PathVariable("a") String a, @RequestBody Ta ta){
         try{
+            ta.setA(a);
             taService.updateTa(a, ta);
             return ResultInfo.success();
         } catch(Exception e){
@@ -80,7 +82,7 @@ public class TaController {
 
     @PostMapping("/import")
     public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
-        taService.importTaExcel(ta_excel);
+        EasyExcel.read(ta_excel.getInputStream(), Ta.class, new TaReadListener(taService)).sheet().doRead();
         return ResultInfo.success();
     }
 

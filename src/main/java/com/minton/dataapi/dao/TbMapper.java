@@ -17,4 +17,5 @@ public interface TbMapper{
 
     void updateTb(String a, Ta ta);
 
+    void caculateTb(String a);
 }

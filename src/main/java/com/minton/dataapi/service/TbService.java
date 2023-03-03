@@ -19,6 +19,7 @@ public class TbService {
 
     public void insertTb(Ta ta){
         tbMapper.insertTb(ta);
+        tbMapper.caculateTb(ta.getA());
     }
 
     public void deleteTaByC(String c) {
@@ -27,5 +28,9 @@ public class TbService {
 
     public void updateTb(String a, Ta ta) {
         tbMapper.updateTb(a, ta);
+        tbMapper.caculateTb(a);
     }
+
+
+
 }

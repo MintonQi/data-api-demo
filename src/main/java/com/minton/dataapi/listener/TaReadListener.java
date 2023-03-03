@@ -4,7 +4,7 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson2.JSON;
-import com.minton.dataapi.dao.TaMapper;
+import com.minton.dataapi.service.TaService;
 import com.minton.dataapi.entity.Ta;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,10 +21,10 @@ public class TaReadListener implements ReadListener<Ta> {
      * 缓存的数据
      */
     private List<Ta> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
-    private TaMapper taMapper;
+    private TaService taService;
 
-    public TaReadListener(TaMapper taMapper){
-        this.taMapper = taMapper;
+    public TaReadListener(TaService taService){
+        this.taService = taService;
     }
 
 
@@ -60,9 +60,9 @@ public class TaReadListener implements ReadListener<Ta> {
     private void saveData() {
         System.out.println("ahhhhhhhhhhhh!");
         log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-//        taMapper.save(cachedDataList);
+//        taService.save(cachedDataList);
         for(Ta ta : cachedDataList){
-            taMapper.insertTa(ta);
+            taService.addTa(ta);
         }
 
         log.info("存储数据库成功！");

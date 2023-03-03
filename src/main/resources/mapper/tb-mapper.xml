@@ -4,25 +4,57 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.minton.dataapi.dao.TbMapper">
 
-    <sql id="Tafields">
+    <sql id="TaFields">
         a,b,c,d,e,f,aa,bb,cc,dd,ee
     </sql>
 
-    <sql id="Tbfields">
+    <sql id="TbFields">
         A,B,C,D,E,F,aa,c_aa,bb,c_bb,cc,c_cc,dd,c_dd,ee,c_ee
     </sql>
 
-<!--    void insertTb(Ta ta);-->
+    <sql id="TbOwnFields">
+        c_aa,c_bb,c_cc,c_dd,c_ee
+    </sql>
+
+    <sql id="TaValues">
+        #{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee}
+    </sql>
+
+
+    <!--    void insertTb(Ta ta);-->
     <insert id="insertTb">
-        INSERT INTO TB
+        INSERT INTO TB(<include refid="TaFields"/>)
+        VALUES(<include refid="TaValues"></include>);
     </insert>
 
 <!--    void deleteTbByAC(String a, String c);-->
+    <delete id="deleteTbByAC">
+        DELETE FROM TB
+        WHERE a = #{a} and c = #{c};
+    </delete>
 
 <!--    void deleteTbByC(String c);-->
+    <delete id="deleteTbByC">
+        DELETE FROM TB
+        WHERE c = #{c};
+    </delete>
 
-<!--    void updateTbOwnColumns();-->
+<!--    void updateTb(String a, Ta ta);-->
+    <update id="updateTb">
+        UPDATE TB
+        SET b = #{ta.b}, c = #{ta.c}, d = #{ta.d}, e = #{ta.e}, f = #{ta.f}, aa = #{ta.aa}, bb = #{ta.bb}, cc = #{ta.cc}, dd = #{ta.dd}, ee = #{ta.ee}
+        WHERE a = #{a}
+    </update>
 
+<!--    void caculateTb(String a);-->
+    <update id="caculateTb">
+        UPDATE TB LEFT JOIN TA ON TA.A = TB.A
+        SET TB.C_AA = (TB.AA &amp; TA.AA),
+        TB.C_BB = (TB.BB &amp; TA.BB),
+        TB.C_CC = (TB.CC &amp; TA.CC),
+        TB.C_DD = (TB.DD &amp; TA.DD),
+        TB.C_EE = (TB.EE &amp; TA.EE);
+    </update>
 
 
 

@@ -6,10 +6,13 @@ import com.alibaba.excel.read.builder.ExcelReaderSheetBuilder;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.fastjson2.JSON;
 import com.minton.dataapi.controller.TaController;
+import com.minton.dataapi.controller.TbController;
 import com.minton.dataapi.dao.TaMapper;
+import com.minton.dataapi.dao.TbMapper;
 import com.minton.dataapi.entity.Ta;
 import com.minton.dataapi.listener.TaReadListener;
 import com.minton.dataapi.service.TaService;
+import com.minton.dataapi.service.TbService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +33,15 @@ class DataApiApplicationTests {
 	@Autowired
 	private TaController taController;
 
+	@Autowired
+	private TbMapper tbMapper;
+
+	@Autowired
+	private TbService tbService;
+
+	@Autowired
+	private TbController tbController;
+
 	@Test
 	void contextLoads() {
 	}
@@ -37,8 +49,8 @@ class DataApiApplicationTests {
 	@Test
 	void testTAMapper(){
 		Ta ta = taMapper.selectTaByA("A0001A");
-		ta.setA("ttt");
-		taMapper.insertTa(ta);
+		ta.setCc(1);
+		taMapper.updateTa(ta.getA(), ta);
 //		try {
 //			taMapper.insertTA(ta);
 //		} catch (Exception e){
@@ -62,8 +74,18 @@ class DataApiApplicationTests {
 //			}
 //		})).sheet().doRead();
 
-		EasyExcel.read("D:\\IDEA_Projects\\data-api\\A.xlsx", Ta.class, new TaReadListener(taMapper)).sheet().doRead();
+//		EasyExcel.read("D:\\IDEA_Projects\\data-api\\A.xlsx", Ta.class, new TaReadListener(taService)).sheet().doRead();
+
+
 	}
 
-
+	@Test
+	void testTbMapper(){
+		Ta ta = taMapper.selectTaByA("A0001A");
+		ta.setA("666");
+		tbService.insertTb(ta);
+//		tbMapper.deleteTbByAC("A0001A", "A");
+//		ta.setCc(1);
+//		tbService.updateTb(ta.getA(), ta);
+	}
 }

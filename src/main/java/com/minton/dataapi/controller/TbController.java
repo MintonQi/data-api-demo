@@ -6,7 +6,6 @@ import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,7 @@ public class TbController {
     }
 
     @PostMapping
-    public ResultInfo addTa(@RequestBody Ta ta){
+    public ResultInfo addTb(@RequestBody Ta ta){
         try{
             tbService.insertTb(ta);
             return ResultInfo.success(ta);

@@ -8,6 +8,10 @@
         a,b,c,d,e,f,aa,bb,cc,dd,ee
     </sql>
 
+    <sql id="TaValues">
+        #{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee}
+    </sql>
+
 
     <select id="selectTaByA" resultType="Ta">
         select <include refid="Tafields"></include>
@@ -17,7 +21,7 @@
 
     <insert id="insertTa" parameterType="Ta">
         INSERT INTO TA (<include refid="Tafields"></include>)
-        VALUES(#{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee})
+        VALUES(<include refid="TaValues"></include>)
     </insert>
 
     <delete id="deleteTaByA">
@@ -27,13 +31,13 @@
     <update id="updateTa" >
         UPDATE TA
         SET b = #{ta.b}, c = #{ta.c}, d = #{ta.d}, e = #{ta.e}, f = #{ta.f}, aa = #{ta.aa}, bb = #{ta.bb}, cc = #{ta.cc}, dd = #{ta.dd}, ee = #{ta.ee}
-        WHERE a = #{a}
+        WHERE a = #{a};
     </update>
 
     <select id="fuzzySearchByA" resultType="Ta">
         SELECT <include refid="Tafields"></include>
         FROM TA
-        WHERE A LIKE concat('%',#{a},'%')
+        WHERE A LIKE concat('%',#{a},'%');
     </select>
 
 
