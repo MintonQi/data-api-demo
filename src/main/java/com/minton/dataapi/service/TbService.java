@@ -17,7 +17,7 @@ public class TbService {
         this.tbMapper = tbMapper;
     }
 
-    public void insertTb(Ta ta){
+    public void addTb(Ta ta){
         tbMapper.insertTb(ta);
         tbMapper.caculateTb(ta.getA());
     }

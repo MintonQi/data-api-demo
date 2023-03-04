@@ -45,4 +45,10 @@ public class TaService {
     public List<Ta> fuzzySearchByA(String a) {
         return taMapper.fuzzySearchByA(a);
     }
+
+    public void save(List<Ta> cachedDataList) {
+        for(Ta ta : cachedDataList){
+            this.addTa(ta);
+        }
+    }
 }

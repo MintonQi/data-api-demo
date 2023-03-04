@@ -26,7 +26,7 @@ public class TbController {
     @PostMapping
     public ResultInfo addTb(@RequestBody Ta ta){
         try{
-            tbService.insertTb(ta);
+            tbService.addTb(ta);
             return ResultInfo.success(ta);
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
@@ -39,7 +39,4 @@ public class TbController {
             return ResultInfo.error(500, "未知错误");
         }
     }
-
-
-
 }
