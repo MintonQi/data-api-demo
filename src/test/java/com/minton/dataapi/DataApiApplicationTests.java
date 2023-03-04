@@ -66,7 +66,7 @@ class DataApiApplicationTests {
 //			}
 //		})).sheet().doRead();
 
-//		EasyExcel.read("D:\\IDEA_Projects\\data-api\\A.xlsx", Ta.class, new TaReadListener(taService)).sheet().doRead();
+//		EasyExcel.read("D:\\IDEA_Projects\\data-api\\A.xlsx", Ta.class, new TableReadListener(taService)).sheet().doRead();
 
 
 	}
@@ -75,7 +75,7 @@ class DataApiApplicationTests {
 	void testTbMapper(){
 		Ta ta = taMapper.selectTaByA("A0001A");
 		ta.setA("666");
-		tbService.addTb(ta);
+		tbService.addTa(ta);
 //		tbMapper.deleteTbByAC("A0001A", "A");
 //		ta.setCc(1);
 //		tbService.updateTb(ta.getA(), ta);

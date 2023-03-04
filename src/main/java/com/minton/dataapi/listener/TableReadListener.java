@@ -4,15 +4,14 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson2.JSON;
-import com.minton.dataapi.service.ImportService;
-import com.minton.dataapi.service.TaService;
+import com.minton.dataapi.service.TableService;
 import com.minton.dataapi.entity.Ta;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @Slf4j
-public class TaReadListener implements ReadListener<Ta> {
+public class TableReadListener implements ReadListener<Ta> {
 
     /**
      * 每隔5条存储数据库，实际使用中可以100条，然后清理list ，方便内存回收
@@ -22,10 +21,10 @@ public class TaReadListener implements ReadListener<Ta> {
      * 缓存的数据
      */
     private List<Ta> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
-    private ImportService importService;
+    private TableService tableService;
 
-    public TaReadListener(ImportService importService){
-        this.importService = importService;
+    public TableReadListener(TableService tableService){
+        this.tableService = tableService;
     }
 
 
@@ -61,7 +60,7 @@ public class TaReadListener implements ReadListener<Ta> {
     private void saveData() {
         System.out.println("ahhhhhhhhhhhh!");
         log.info("{}条数据，开始存储数据库！", cachedDataList.size());
-        taService.save(cachedDataList);
+        tableService.save(cachedDataList);
         log.info("存储数据库成功！");
     }
 

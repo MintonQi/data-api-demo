@@ -1,15 +1,17 @@
 package com.minton.dataapi.controller;
 
+import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
+import com.minton.dataapi.listener.TableReadListener;
 import com.minton.dataapi.service.TbService;
 import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 
 @RestController
@@ -26,12 +28,12 @@ public class TbController {
     @PostMapping
     public ResultInfo addTb(@RequestBody Ta ta){
         try{
-            tbService.addTb(ta);
+            tbService.addTa(ta);
             return ResultInfo.success(ta);
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
             return ResultInfo.error(4001,"此A字段的值已存在！");
-        } catch (DataIntegrityViolationException e){ // 处理得，，，可能不是很对。。。
+        } catch (DataIntegrityViolationException e){
             e.printStackTrace();
             return ResultInfo.error(4002, "A字段不能为空！");
         } catch (Exception e){
@@ -39,4 +41,37 @@ public class TbController {
             return ResultInfo.error(500, "未知错误");
         }
     }
+
+    @DeleteMapping("/{c}")
+    public ResultInfo deleteTbByC(@PathVariable("c") String c){
+        try{
+            tbService.deleteTbByC(c);
+            return ResultInfo.success();
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResultInfo.error();
+        }
+    }
+
+    @DeleteMapping("/{a}/{c}")
+    public ResultInfo deleteTbByC(@PathVariable("a") String a, @PathVariable("c") String c){
+        try{
+            tbService.deleteTbByAC(a, c);
+            return ResultInfo.success();
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResultInfo.error();
+        }
+    }
+
+    @PostMapping("/import")
+    public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
+        EasyExcel.read(ta_excel.getInputStream(), Ta.class, new TableReadListener(tbService)).sheet().doRead();
+        return ResultInfo.success();
+    }
+
+
+
+
+
 }

@@ -40,7 +40,4 @@
         WHERE A LIKE concat('%',#{a},'%');
     </select>
 
-
-
-
 </mapper>

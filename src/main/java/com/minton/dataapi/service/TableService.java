@@ -6,6 +6,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface ImportService {
-    public void save(List<Ta> cachedDataList);
+public interface TableService {
+
+    void addTa(Ta ta);
+
+    void updateTa(String a, Ta ta);
+
+    void save(List<Ta> cachedDataList);
+
+
+
 }
