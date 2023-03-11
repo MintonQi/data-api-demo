@@ -46,7 +46,7 @@
         WHERE a = #{a}
     </update>
 
-<!--    void caculateTb(String a);-->
+<!--    void calculateTb(String a);-->
     <update id="caculateTb">
         UPDATE TB LEFT JOIN TA ON TA.A = TB.A
         SET TB.C_AA = (TB.AA &amp; TA.AA),
@@ -55,6 +55,10 @@
         TB.C_DD = (TB.DD &amp; TA.DD),
         TB.C_EE = (TB.EE &amp; TA.EE);
     </update>
+
+    <select id="selectTbs" resultType="Tb">
+        select * from tb;
+    </select>
 
 
 

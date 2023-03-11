@@ -2,6 +2,7 @@ package com.minton.dataapi.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
+import com.minton.dataapi.entity.Tb;
 import com.minton.dataapi.listener.TableReadListener;
 import com.minton.dataapi.service.TbService;
 import com.minton.dataapi.vo.ResultInfo;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @RestController
@@ -54,7 +56,7 @@ public class TbController {
     }
 
     @DeleteMapping("/{a}/{c}")
-    public ResultInfo deleteTbByC(@PathVariable("a") String a, @PathVariable("c") String c){
+    public ResultInfo deleteTbByAC(@PathVariable("a") String a, @PathVariable("c") String c){
         try{
             tbService.deleteTbByAC(a, c);
             return ResultInfo.success();
@@ -71,6 +73,13 @@ public class TbController {
     }
 
 
+    @GetMapping("/export")
+    public ResultInfo exportTbExcel(){
+
+        List<Tb> list = tbService.findTbs();
+        EasyExcel.write("D:\\IDEA_Projects\\data-api\\C.xlsx", Tb.class).sheet("Sheet1").doWrite(list);
+        return ResultInfo.success();
+    }
 
 
 

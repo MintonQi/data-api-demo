@@ -3,6 +3,7 @@ package com.minton.dataapi.service;
 
 import com.minton.dataapi.dao.TbMapper;
 import com.minton.dataapi.entity.Ta;
+import com.minton.dataapi.entity.Tb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,10 @@ public class TbService implements TableService {
         this.tbMapper = tbMapper;
     }
 
+    @Transactional
     public void addTa(Ta ta){
         tbMapper.insertTb(ta);
-        tbMapper.caculateTb(ta.getA());
+        tbMapper.calculateTb(ta.getA());
     }
 
     public void deleteTbByC(String c) {
@@ -37,7 +39,7 @@ public class TbService implements TableService {
     @Transactional
     public void updateTa(String a, Ta ta) {
         tbMapper.updateTb(a, ta);
-        tbMapper.caculateTb(a);
+        tbMapper.calculateTb(a);
     }
 
     @Override
@@ -46,5 +48,11 @@ public class TbService implements TableService {
             this.addTa(ta);
         }
     }
+
+    public List<Tb> findTbs() {
+        return tbMapper.selectTbs();
+    }
+
+
 
 }

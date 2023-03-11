@@ -1,21 +1,39 @@
 package com.minton.dataapi.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 public class Tb {
+    @ExcelProperty("a")
     private String a;
+    @ExcelProperty("b")
     private String b;
+    @ExcelProperty("c")
     private String c;
+    @ExcelProperty("d")
     private String d;
+    @ExcelProperty("e")
     private String e;
+    @ExcelProperty("f")
     private String f;
+    @ExcelProperty("aa")
     private int aa;
+    @ExcelProperty("c_aa")
     private int c_aa;
+    @ExcelProperty("bb")
     private int bb;
+    @ExcelProperty("c_bb")
     private int c_bb;
+    @ExcelProperty("cc")
     private int cc;
+    @ExcelProperty("c_cc")
     private int c_cc;
+    @ExcelProperty("dd")
     private int dd;
+    @ExcelProperty("c_dd")
     private int c_dd;
+    @ExcelProperty("ee")
     private int ee;
+    @ExcelProperty("c_ee")
     private int c_ee;
 
     public Tb(){}

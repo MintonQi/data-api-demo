@@ -28,19 +28,19 @@ public class TaService implements TableService {
     @Transactional
     public void addTa(Ta ta){
         taMapper.insertTa(ta);
-        tbMapper.caculateTb(ta.getA());
+        tbMapper.calculateTb(ta.getA());
     }
 
     @Transactional
     public void deleteTaByA(String a) {
         taMapper.deleteTaByA(a);
-        tbMapper.caculateTb(a);
+        tbMapper.calculateTb(a);
     }
     @Override
     @Transactional
     public void updateTa(String a, Ta ta) {
         taMapper.updateTa(a, ta);
-        tbMapper.caculateTb(a);
+        tbMapper.calculateTb(a);
     }
 
     public List<Ta> fuzzySearchByA(String a) {

@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface TbMapper{
 
+    List<Tb> selectTbs();
+
     void insertTb(Ta ta);
 
     void deleteTbByAC(String a, String c);
@@ -17,5 +19,5 @@ public interface TbMapper{
 
     void updateTb(String a, Ta ta);
 
-    void caculateTb(String a);
+    void calculateTb(String a);
 }
