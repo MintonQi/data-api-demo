@@ -31,7 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
-/B.xlsx
-/C.xlsx
-/~$A.xlsx
-/~$B.xlsx
+
+### .xlsx ###
+#/B.xlsx
+#/C.xlsx
+#/~$A.xlsx
+#/~$B.xlsx
+*.xlsx

@@ -77,7 +77,8 @@ public class TbController {
     public ResultInfo exportTbExcel(){
 
         List<Tb> list = tbService.findTbs();
-        EasyExcel.write("D:\\IDEA_Projects\\data-api\\C.xlsx", Tb.class).sheet("Sheet1").doWrite(list);
+        //先写死吧这个路径，，，
+        EasyExcel.write("D:\\IDEA_Projects\\data-api\\TbLists.xlsx", Tb.class).sheet("Sheet1").doWrite(list);
         return ResultInfo.success();
     }
 
