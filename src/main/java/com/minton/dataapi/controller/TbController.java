@@ -27,6 +27,12 @@ public class TbController {
         this.tbService = tbService;
     }
 
+    @GetMapping()
+    public ResultInfo selectTb(@PathVariable String a, @PathVariable String c){
+        tbService.findTbs();
+        return ResultInfo.success();
+    }
+
     @PostMapping
     public ResultInfo addTb(@RequestBody Ta ta){
         try{
@@ -41,6 +47,18 @@ public class TbController {
         } catch (Exception e){
             e.printStackTrace();
             return ResultInfo.error(500, "未知错误");
+        }
+    }
+
+    @PutMapping("/{a}")
+    public ResultInfo updateTa(@PathVariable("a") String a, @RequestBody Ta ta){
+        try{
+            ta.setA(a);
+            tbService.updateTa(a, ta);
+            return ResultInfo.success();
+        } catch(Exception e){
+            e.printStackTrace();
+            return ResultInfo.error(5000,"未知错误");
         }
     }
 
@@ -66,14 +84,14 @@ public class TbController {
         }
     }
 
-    @PostMapping("/import")
+    @PutMapping("/excel")
     public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
         EasyExcel.read(ta_excel.getInputStream(), Ta.class, new TableReadListener(tbService)).sheet().doRead();
         return ResultInfo.success();
     }
 
 
-    @GetMapping("/export")
+    @GetMapping("/excel")
     public ResultInfo exportTbExcel(){
 
         List<Tb> list = tbService.findTbs();

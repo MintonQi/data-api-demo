@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minton.dataapi.dao.TcMapper">
+
+    <delete id="clearTc">
+        DELETE FROM TC;
+    </delete>
+
+    <insert id="calculateTc">
+        INSERT INTO TC (B, AAS, BBS, CCS, AAA, BBA, CCA, AASS, AAC, DDS)
+        SELECT TA_SUM.B, C_AA_SUM/AA_SUM, C_BB_SUM/BB_SUM, C_CC_SUM/CC_SUM, C_AA_SUM/TB_AA_SUM, C_BB_SUM/TB_BB_SUM, C_CC_SUM/TB_CC_SUM, C_EE_SUM/EE_SUM, (C_AA_SUM+C_EE_SUM)/(AA_SUM+EE_SUM), C_DD_SUM/DD_SUM
+        FROM (SELECT TA.B, SUM(AA) AA_SUM, SUM(BB) BB_SUM, SUM(CC) CC_SUM, SUM(DD) DD_SUM, SUM(EE) EE_SUM FROM TA GROUP BY TA.B) AS TA_SUM
+        LEFT JOIN (SELECT TB.B, SUM(C_AA) C_AA_SUM, SUM(C_BB) C_BB_SUM, SUM(C_CC) C_CC_SUM, SUM(C_DD) C_DD_SUM, SUM(C_EE) C_EE_SUM, SUM(AA) TB_AA_SUM, SUM(BB) TB_BB_SUM, SUM(CC) TB_CC_SUM FROM TB GROUP BY TB.B) AS TB_SUM
+        ON TA_SUM.B = TB_SUM.B
+        WHERE TA_SUM.B IS NOT NULL;
+    </insert>
+
+    <select id="fuzzySearchTcByB" resultType="Tc">
+        select * from tc
+        where b like concat('%',#{b},'%');
+    </select>
+
+
+    <select id="selectTcs" resultType="Tc">
+        select * from tc;
+    </select>
+
+
+
+</mapper>

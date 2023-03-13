@@ -15,7 +15,7 @@ public interface TaMapper {
 
     void updateTa(String a, Ta ta);
 
-    List<Ta> fuzzySearchByA(String a);
+    List<Ta> fuzzySearchTaByA(String a);
 
     void save(List<Ta> cachedDataList);
 }

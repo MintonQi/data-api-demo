@@ -44,7 +44,7 @@ public class TaService implements TableService {
     }
 
     public List<Ta> fuzzySearchByA(String a) {
-        return taMapper.fuzzySearchByA(a);
+        return taMapper.fuzzySearchTaByA(a);
     }
 
     @Override

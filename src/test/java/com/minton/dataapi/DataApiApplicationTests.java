@@ -4,6 +4,7 @@ import com.minton.dataapi.controller.TaController;
 import com.minton.dataapi.controller.TbController;
 import com.minton.dataapi.dao.TaMapper;
 import com.minton.dataapi.dao.TbMapper;
+import com.minton.dataapi.dao.TcMapper;
 import com.minton.dataapi.entity.Ta;
 import com.minton.dataapi.service.TaService;
 import com.minton.dataapi.service.TbService;
@@ -33,6 +34,8 @@ class DataApiApplicationTests {
 
 	@Autowired
 	private TbController tbController;
+	@Autowired
+	private TcMapper tcMapper;
 
 	@Test
 	void contextLoads() {
@@ -80,4 +83,10 @@ class DataApiApplicationTests {
 //		ta.setCc(1);
 //		tbService.updateTb(ta.getA(), ta);
 	}
+
+	@Test
+	void testTc(){
+		tcMapper.clearTc();
+	}
+
 }

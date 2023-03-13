@@ -34,7 +34,7 @@
         WHERE a = #{a};
     </update>
 
-    <select id="fuzzySearchByA" resultType="Ta">
+    <select id="fuzzySearchTaByA" resultType="Ta">
         SELECT <include refid="Tafields"></include>
         FROM TA
         WHERE A LIKE concat('%',#{a},'%');

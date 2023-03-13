@@ -47,7 +47,7 @@
     </update>
 
 <!--    void calculateTb(String a);-->
-    <update id="caculateTb">
+    <update id="calculateTb">
         UPDATE TB LEFT JOIN TA ON TA.A = TB.A
         SET TB.C_AA = (TB.AA &amp; TA.AA),
         TB.C_BB = (TB.BB &amp; TA.BB),
