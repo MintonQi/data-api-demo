@@ -53,7 +53,17 @@
         TB.C_BB = (TB.BB &amp; TA.BB),
         TB.C_CC = (TB.CC &amp; TA.CC),
         TB.C_DD = (TB.DD &amp; TA.DD),
-        TB.C_EE = (TB.EE &amp; TA.EE);
+        TB.C_EE = (TB.EE &amp; TA.EE)
+        WHERE TA.A = #{a};
+    </update>
+
+    <update id="calculateTbs">
+        UPDATE TB LEFT JOIN TA ON TA.A = TB.A
+        SET TB.C_AA = (TB.AA &amp; TA.AA),
+        TB.C_BB = (TB.BB &amp; TA.BB),
+        TB.C_CC = (TB.CC &amp; TA.CC),
+        TB.C_DD = (TB.DD &amp; TA.DD),
+        TB.C_EE = (TB.EE &amp; TA.EE)
     </update>
 
     <select id="selectTbs" resultType="Tb">

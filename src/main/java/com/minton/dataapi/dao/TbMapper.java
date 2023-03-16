@@ -22,4 +22,6 @@ public interface TbMapper{
     void calculateTb(String a);
 
     Tb selectTbByAC(String a, String c);
+
+    void calculateTbs();
 }

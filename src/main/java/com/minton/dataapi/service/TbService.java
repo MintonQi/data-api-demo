@@ -50,6 +50,7 @@ public class TbService implements TableService {
     }
 
     public List<Tb> findTbs() {
+        tbMapper.calculateTbs();
         return tbMapper.selectTbs();
     }
 
