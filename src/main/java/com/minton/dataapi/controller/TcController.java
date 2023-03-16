@@ -38,7 +38,7 @@ public class TcController {
     public ResultInfo calculateTc(){
         try{
             tcService.calculateTc();
-            return ResultInfo.success();
+            return ResultInfo.success("计算完成");
         }catch (Exception e){
             e.printStackTrace();
             return ResultInfo.error(5000, "未知错误");

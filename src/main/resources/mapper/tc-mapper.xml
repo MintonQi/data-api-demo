@@ -24,7 +24,16 @@
 
 
     <select id="selectTcs" resultType="Tc">
-        select * from tc;
+        select b,   concat(0 + cast(aas*100 as char), '%') aaS,
+                    concat(0 + cast(bbs*100 as char), '%') bbS,
+                    concat(0 + cast(ccs*100 as char), '%') ccS,
+                    concat(0 + cast(aaa*100 as char), '%') aaA,
+                    concat(0 + cast(bba*100 as char), '%') bbA,
+                    concat(0 + cast(cca*100 as char), '%') ccA,
+                    concat(0 + cast(aass*100 as char), '%') aaSS,
+                    concat(0 + cast(aac*100 as char), '%') aaC,
+                    concat(0 + cast(dds*100 as char), '%') ddS
+        from tc;
     </select>
 
 

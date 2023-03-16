@@ -60,6 +60,9 @@
         select * from tb;
     </select>
 
+    <select id="selectTbByAC" resultType="Tb">
+        select * from tb where a = #{a} and c = #{c};
+    </select>
 
 
 </mapper>

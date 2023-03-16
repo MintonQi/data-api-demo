@@ -18,4 +18,6 @@ public interface TaMapper {
     List<Ta> fuzzySearchTaByA(String a);
 
     void save(List<Ta> cachedDataList);
+
+    List<Ta> selectTas();
 }

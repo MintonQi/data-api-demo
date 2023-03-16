@@ -89,4 +89,16 @@ class DataApiApplicationTests {
 		tcMapper.clearTc();
 	}
 
+	@Test
+	void testPrintTas(){
+
+	}
+
+	@Test
+	void insertTbRandom20000(){
+
+	}
+
+
+
 }

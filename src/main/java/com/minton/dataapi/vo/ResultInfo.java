@@ -36,6 +36,10 @@ public class ResultInfo extends HashMap<String, Object> {
         return new ResultInfo(ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMsg());
     }
 
+    public static ResultInfo success(String msg){
+        return new ResultInfo(ResultEnum.SUCCESS.getCode(), msg);
+    }
+
     public static ResultInfo success(Object obj){
         return new ResultInfo(ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMsg(),obj);
     }

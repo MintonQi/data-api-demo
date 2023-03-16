@@ -13,11 +13,13 @@ public interface TbMapper{
 
     void insertTb(Ta ta);
 
-    void deleteTbByAC(String a, String c);
+    int deleteTbByAC(String a, String c);
 
-    void deleteTbByC(String c);
+    int deleteTbByC(String c);
 
     void updateTb(String a, Ta ta);
 
     void calculateTb(String a);
+
+    Tb selectTbByAC(String a, String c);
 }

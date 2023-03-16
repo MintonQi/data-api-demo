@@ -2,12 +2,14 @@ package com.minton.dataapi.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
+import com.minton.dataapi.entity.Tb;
 import com.minton.dataapi.listener.TableReadListener;
 import com.minton.dataapi.service.TaService;
 import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -70,7 +72,7 @@ public class TaController {
     }
 
     @GetMapping("/{a}")
-    public ResultInfo query(@PathVariable("a") String a){
+    public ResultInfo fuzzySearchByA(@PathVariable("a") String a){
         try {
             List<Ta> list_ta = taService.fuzzySearchByA(a);
             return ResultInfo.success(list_ta);
@@ -80,9 +82,20 @@ public class TaController {
         }
     }
 
-    @PostMapping("/import")
+    @Transactional
+    @PostMapping("/excel")
     public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
         EasyExcel.read(ta_excel.getInputStream(), Ta.class, new TableReadListener(taService)).sheet().doRead();
+        return ResultInfo.success("导入成功");
+    }
+
+    @Transactional
+    @GetMapping("/excel")
+    public ResultInfo exportTbExcel(){
+        List<Ta> list = taService.findTas();
+        //先写死吧这个路径，，，
+        EasyExcel.write("D:\\IDEA_Projects\\data-api\\TaLists.xlsx", Ta.class).sheet("Sheet1").doWrite(list);
         return ResultInfo.success();
     }
+
 }

@@ -27,12 +27,12 @@ public class TbService implements TableService {
         tbMapper.calculateTb(ta.getA());
     }
 
-    public void deleteTbByC(String c) {
-        tbMapper.deleteTbByC(c);
+    public int deleteTbByC(String c) {
+        return tbMapper.deleteTbByC(c);
     }
 
-    public void deleteTbByAC(String a, String c){
-        tbMapper.deleteTbByAC(a, c);
+    public int deleteTbByAC(String a, String c){
+        return tbMapper.deleteTbByAC(a, c);
     }
 
     @Override
@@ -51,6 +51,10 @@ public class TbService implements TableService {
 
     public List<Tb> findTbs() {
         return tbMapper.selectTbs();
+    }
+
+    public Tb selectTbByAC(String a, String c){
+        return tbMapper.selectTbByAC(a,c);
     }
 
 

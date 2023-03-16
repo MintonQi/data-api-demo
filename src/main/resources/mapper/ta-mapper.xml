@@ -12,6 +12,9 @@
         #{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee}
     </sql>
 
+    <select id="selectTas" resultType="Ta">
+        select * from ta;
+    </select>
 
     <select id="selectTaByA" resultType="Ta">
         select <include refid="Tafields"></include>

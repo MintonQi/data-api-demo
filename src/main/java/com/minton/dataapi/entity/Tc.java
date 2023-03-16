@@ -10,23 +10,23 @@ public class Tc {
     private String b;
 
     @ExcelProperty("aaS")
-    private double aaS;
+    private String aaS;
 
     @ExcelProperty("bbS")
-    private double bbS;
+    private String bbS;
     @ExcelProperty("ccS")
-    private double ccS;
+    private String ccS;
     @ExcelProperty("aaA")
-    private double aaA;
+    private String aaA;
     @ExcelProperty("bbA")
-    private double bbA;
+    private String bbA;
     @ExcelProperty("ccA")
-    private double ccA;
+    private String ccA;
     @ExcelProperty("aaSS")
-    private double aaSS;
+    private String aaSS;
     @ExcelProperty("aaC")
-    private double aaC;
+    private String aaC;
     @ExcelProperty("ddS")
-    private double ddS;
+    private String ddS;
 
 }

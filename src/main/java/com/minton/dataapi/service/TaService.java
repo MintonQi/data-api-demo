@@ -28,7 +28,7 @@ public class TaService implements TableService {
     @Transactional
     public void addTa(Ta ta){
         taMapper.insertTa(ta);
-        tbMapper.calculateTb(ta.getA());
+//        tbMapper.calculateTb(ta.getA());
     }
 
     @Transactional
@@ -52,5 +52,9 @@ public class TaService implements TableService {
         for(Ta ta : cachedDataList){
             this.addTa(ta);
         }
+    }
+
+    public List<Ta> findTas() {
+        return taMapper.selectTas();
     }
 }

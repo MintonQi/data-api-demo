@@ -9,6 +9,7 @@ import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -65,8 +66,8 @@ public class TbController {
     @DeleteMapping("/{c}")
     public ResultInfo deleteTbByC(@PathVariable("c") String c){
         try{
-            tbService.deleteTbByC(c);
-            return ResultInfo.success();
+            int n = tbService.deleteTbByC(c);
+            return ResultInfo.success("删除了" + n + "条记录");
         } catch (Exception e){
             e.printStackTrace();
             return ResultInfo.error();
@@ -76,21 +77,27 @@ public class TbController {
     @DeleteMapping("/{a}/{c}")
     public ResultInfo deleteTbByAC(@PathVariable("a") String a, @PathVariable("c") String c){
         try{
-            tbService.deleteTbByAC(a, c);
-            return ResultInfo.success();
+            if(tbService.selectTbByAC(a, c) == null){
+                return ResultInfo.error("删除对象不存在");
+            } else{
+                int n = tbService.deleteTbByAC(a, c);
+                return ResultInfo.success("删除了"+ n +"条记录");
+            }
         } catch (Exception e){
             e.printStackTrace();
             return ResultInfo.error();
         }
     }
 
-    @PutMapping("/excel")
+    @Transactional
+    @PostMapping("/excel")
     public ResultInfo importTaExcel(MultipartFile ta_excel) throws IOException {
         EasyExcel.read(ta_excel.getInputStream(), Ta.class, new TableReadListener(tbService)).sheet().doRead();
         return ResultInfo.success();
     }
 
 
+    @Transactional
     @GetMapping("/excel")
     public ResultInfo exportTbExcel(){
 
