@@ -8,7 +8,9 @@ import java.util.List;
 @Service
 public interface TableService {
 
+
     void addTa(Ta ta);
+    void batchInsertTa(List<Ta> ta);
 
     void updateTa(String a, Ta ta);
 

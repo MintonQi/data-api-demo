@@ -23,6 +23,9 @@ public class TableReadListener implements ReadListener<Ta> {
     private List<Ta> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
     private TableService tableService;
 
+    private int saveCount = 0;
+    private long timestamp = System.currentTimeMillis();
+    private final long initialTimeStamp = System.currentTimeMillis();
     public TableReadListener(TableService tableService){
         this.tableService = tableService;
     }
@@ -30,14 +33,17 @@ public class TableReadListener implements ReadListener<Ta> {
 
     @Override
     public void invoke(Ta ta, AnalysisContext analysisContext) {
-        System.out.println(JSON.toJSONString(ta));
-        log.info("解析到一条数据:{}", JSON.toJSONString(ta));
+
+//        log.info("解析到一条数据:{}", JSON.toJSONString(ta));
         cachedDataList.add(ta);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (cachedDataList.size() >= BATCH_COUNT) {
             saveData();
             // 存储完成清理 list
             cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+            saveCount++;
+            System.out.println("从上次清理至今耗时"+(System.currentTimeMillis()-timestamp));
+            timestamp = System.currentTimeMillis();
         }
     }
 
@@ -49,20 +55,22 @@ public class TableReadListener implements ReadListener<Ta> {
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         // 这里也要保存数据，确保最后遗留的数据也存储到数据库
-        saveData();
-        log.info("所有数据解析完成！");
-        System.out.println("所有数据解析完成！");
+        // 但是最好判断是否为空list
+        if(cachedDataList.size() > 0){
+            saveData();
+        }
+        log.info("所有数据解析完成！耗时"+(System.currentTimeMillis()-initialTimeStamp));
+
     }
 
     /**
      * 加上存储数据库
      */
     private void saveData() {
-        System.out.println("ahhhhhhhhhhhh!");
-        log.info("{}条数据，开始存储数据库！", cachedDataList.size());
+//        System.out.println("ahhhhhhhhhhhh!");
+        long start = System.currentTimeMillis();
+        log.info("{}条数据，试图开线程存储数据库！", cachedDataList.size());
         tableService.save(cachedDataList);
-        log.info("存储数据库成功！");
+        log.info("save() called, 耗时"+ (System.currentTimeMillis()-start));
     }
-
-
 }

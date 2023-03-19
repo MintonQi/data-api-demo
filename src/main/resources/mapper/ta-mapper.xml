@@ -4,10 +4,9 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.minton.dataapi.dao.TaMapper">
 
-    <sql id="Tafields">
-        a,b,c,d,e,f,aa,bb,cc,dd,ee
+    <sql id="TaFields">
+        `a`, `b`, `c`, `d`, `e`, `f`, `aa`, `bb`, `cc`, `dd`, `ee`
     </sql>
-
     <sql id="TaValues">
         #{a},#{b},#{c},#{d},#{e},#{f},#{aa},#{bb},#{cc},#{dd},#{ee}
     </sql>
@@ -17,15 +16,26 @@
     </select>
 
     <select id="selectTaByA" resultType="Ta">
-        select <include refid="Tafields"></include>
+        select <include refid="TaFields"></include>
         from ta
         where a = #{a};
     </select>
 
     <insert id="insertTa" parameterType="Ta">
-        INSERT INTO TA (<include refid="Tafields"></include>)
+        INSERT INTO TA (<include refid="TaFields"></include>)
         VALUES(<include refid="TaValues"></include>)
     </insert>
+
+
+    <insert id="batchInsertTa" parameterType="com.minton.dataapi.entity.Ta">
+        insert into `ta` (a, b, c, d, e, f, aa, bb, cc, dd, ee)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.a}, #{item.b}, #{item.c}, #{item.d}, #{item.e}, #{item.f},
+            #{item.aa}, #{item.bb}, #{item.cc}, #{item.dd}, #{item.ee})
+        </foreach>
+    </insert>
+
 
     <delete id="deleteTaByA">
         DELETE FROM TA WHERE a = #{a};
@@ -38,7 +48,7 @@
     </update>
 
     <select id="fuzzySearchTaByA" resultType="Ta">
-        SELECT <include refid="Tafields"></include>
+        SELECT <include refid="TaFields"></include>
         FROM TA
         WHERE A LIKE concat('%',#{a},'%');
     </select>

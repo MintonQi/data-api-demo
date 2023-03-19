@@ -95,8 +95,13 @@ class DataApiApplicationTests {
 	}
 
 	@Test
-	void insertTbRandom20000(){
+	void testGetTime(){
+		System.out.println(System.currentTimeMillis());
+	}
 
+	@Test
+	void testGetProcessor(){
+		System.out.println(Runtime.getRuntime().availableProcessors());
 	}
 
 

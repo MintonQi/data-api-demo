@@ -21,10 +21,14 @@
     </sql>
 
 
-    <!--    void insertTb(Ta ta);-->
-    <insert id="insertTb">
+
+
+    <insert id="batchInsertTb">
         INSERT INTO TB(<include refid="TaFields"/>)
-        VALUES(<include refid="TaValues"></include>);
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.a}, #{item.b}, #{item.c}, #{item.d}, #{item.e},#{item.f}, #{item.aa},#{item.bb}, #{item.cc},#{item.dd},#{item.ee})
+        </foreach> ;
     </insert>
 
 <!--    void deleteTbByAC(String a, String c);-->

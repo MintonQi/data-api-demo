@@ -20,4 +20,6 @@ public interface TaMapper {
     void save(List<Ta> cachedDataList);
 
     List<Ta> selectTas();
+
+    void batchInsertTa(List<Ta> ta);
 }

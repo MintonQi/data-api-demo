@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.minton.dataapi.entity.Ta;
 import com.minton.dataapi.entity.Tb;
 import com.minton.dataapi.entity.Tc;
+import com.minton.dataapi.service.TbService;
 import com.minton.dataapi.service.TcService;
 import com.minton.dataapi.vo.ResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import java.util.List;
 @RequestMapping("/tc")
 public class TcController {
 
-    private TcService tcService;
+    private final TbService tbService;
+    private final TcService tcService;
 
     @Autowired
-    public TcController(TcService tcService){
+    public TcController(TbService tbService, TcService tcService){
+        this.tbService = tbService;
         this.tcService = tcService;
     }
 
@@ -37,6 +40,7 @@ public class TcController {
     @PutMapping
     public ResultInfo calculateTc(){
         try{
+            tbService.calculateTbs();
             tcService.calculateTc();
             return ResultInfo.success("计算完成");
         }catch (Exception e){

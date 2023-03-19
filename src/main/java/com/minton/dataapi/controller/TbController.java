@@ -103,8 +103,9 @@ public class TbController {
 
         List<Tb> list = tbService.findTbs();
         //先写死吧这个路径，，，
-        EasyExcel.write("D:\\IDEA_Projects\\data-api\\TbLists.xlsx", Tb.class).sheet("Sheet1").doWrite(list);
-        return ResultInfo.success();
+        String path = "D:\\IDEA_Projects\\data-api\\TbLists" + System.currentTimeMillis() + ".xlsx";
+        EasyExcel.write(path, Tb.class).sheet("Sheet1").doWrite(list);
+        return ResultInfo.success("数据已导出至" + path);
     }
 
 

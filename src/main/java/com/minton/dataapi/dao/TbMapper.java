@@ -12,6 +12,7 @@ public interface TbMapper{
     List<Tb> selectTbs();
 
     void insertTb(Ta ta);
+    void batchInsertTb(List<Ta> taList);
 
     int deleteTbByAC(String a, String c);
 

@@ -31,6 +31,11 @@ public class TaService implements TableService {
 //        tbMapper.calculateTb(ta.getA());
     }
 
+    @Override
+    public void batchInsertTa(List<Ta> ta) {
+        taMapper.batchInsertTa(ta);
+    }
+
     @Transactional
     public void deleteTaByA(String a) {
         taMapper.deleteTaByA(a);
@@ -49,9 +54,7 @@ public class TaService implements TableService {
 
     @Override
     public void save(List<Ta> cachedDataList) {
-        for(Ta ta : cachedDataList){
-            this.addTa(ta);
-        }
+        this.batchInsertTa(cachedDataList);
     }
 
     public List<Ta> findTas() {
